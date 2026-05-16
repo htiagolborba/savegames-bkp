@@ -1,0 +1,588 @@
+[
+  {
+    "name": "Resident Evil 4 Remake",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\2050650",
+      "%USERPROFILE%\\Documents\\My Games\\Capcom\\RE4"
+    ]
+  },
+  {
+    "name": "Resident Evil Requiem",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\3764200"
+    ]
+  },
+  {
+    "name": "Resident Evil Village",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1196590"
+    ]
+  },
+  {
+    "name": "Resident Evil 2 Remake",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\883710"
+    ]
+  },
+  {
+    "name": "Resident Evil 3 Remake",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\952060"
+    ]
+  },
+  {
+    "name": "Resident Evil 7 Biohazard",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\418370"
+    ]
+  },
+  {
+    "name": "Resident Evil Revelations",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\222480"
+    ]
+  },
+  {
+    "name": "Resident Evil Revelations 2",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\287290"
+    ]
+  },
+  {
+    "name": "Resident Evil HD Remaster",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\304240"
+    ]
+  },
+  {
+    "name": "Resident Evil 0 HD Remaster",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\339340"
+    ]
+  },
+  {
+    "name": "Devil May Cry 5",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\601150"
+    ]
+  },
+  {
+    "name": "Dragon's Dogma 2",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\2054970"
+    ]
+  },
+  {
+    "name": "Monster Hunter World",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\582010"
+    ]
+  },
+  {
+    "name": "Monster Hunter Rise",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1446780"
+    ]
+  },
+  {
+    "name": "Street Fighter 6",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1364780"
+    ]
+  },
+  {
+    "name": "God of War",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\God of War"
+    ]
+  },
+  {
+    "name": "God of War Ragnarok",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\God of War Ragnarök",
+      "%USERPROFILE%\\Saved Games\\God of War Ragnarok"
+    ]
+  },
+  {
+    "name": "Marvel's Spider-Man Remastered",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Marvel's Spider-Man Remastered"
+    ]
+  },
+  {
+    "name": "Marvel's Spider-Man Miles Morales",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Marvel's Spider-Man Miles Morales"
+    ]
+  },
+  {
+    "name": "Marvel's Spider-Man 2",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Marvel's Spider-Man 2"
+    ]
+  },
+  {
+    "name": "Ghost of Tsushima Director's Cut",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Ghost of Tsushima DIRECTOR'S CUT"
+    ]
+  },
+  {
+    "name": "Horizon Zero Dawn",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Horizon Zero Dawn",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1151640"
+    ]
+  },
+  {
+    "name": "Horizon Forbidden West",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Horizon Forbidden West Complete Edition"
+    ]
+  },
+  {
+    "name": "The Last of Us Part I",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\The Last of Us Part I"
+    ]
+  },
+  {
+    "name": "Uncharted Legacy of Thieves Collection",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\Uncharted Legacy of Thieves Collection"
+    ]
+  },
+  {
+    "name": "Ratchet and Clank Rift Apart",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\Insomniac Games\\Ratchet & Clank Rift Apart"
+    ]
+  },
+  {
+    "name": "Returnal",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1649240",
+      "%LOCALAPPDATA%\\Returnal"
+    ]
+  },
+  {
+    "name": "Death Stranding",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1190460"
+    ]
+  },
+  {
+    "name": "Death Stranding 2 On the Beach",
+    "paths": [
+      "%LOCALAPPDATA%\\KojimaProductions\\DeathStranding2\\Saved\\SaveGames",
+      "%LOCALAPPDATA%\\KojimaProductions\\DeathStranding2"
+    ]
+  },
+  {
+    "name": "Cyberpunk 2077",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\CD Projekt Red\\Cyberpunk 2077"
+    ]
+  },
+  {
+    "name": "The Witcher 3",
+    "paths": [
+      "%USERPROFILE%\\Documents\\The Witcher 3"
+    ]
+  },
+  {
+    "name": "Elden Ring",
+    "paths": [
+      "%APPDATA%\\EldenRing",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1245620"
+    ]
+  },
+  {
+    "name": "Dark Souls III",
+    "paths": [
+      "%APPDATA%\\DarkSoulsIII",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\374320"
+    ]
+  },
+  {
+    "name": "Dark Souls II Scholar of the First Sin",
+    "paths": [
+      "%APPDATA%\\DarkSoulsII",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\335300"
+    ]
+  },
+  {
+    "name": "Dark Souls Remastered",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\570940"
+    ]
+  },
+  {
+    "name": "Sekiro Shadows Die Twice",
+    "paths": [
+      "%APPDATA%\\Sekiro",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\814380"
+    ]
+  },
+  {
+    "name": "Armored Core VI",
+    "paths": [
+      "%APPDATA%\\ArmoredCore6",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1888160"
+    ]
+  },
+  {
+    "name": "Baldur's Gate 3",
+    "paths": [
+      "%LOCALAPPDATA%\\Larian Studios\\Baldur's Gate 3\\PlayerProfiles"
+    ]
+  },
+  {
+    "name": "Lies of P",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1627720",
+      "%LOCALAPPDATA%\\LiesOfP"
+    ]
+  },
+  {
+    "name": "Hogwarts Legacy",
+    "paths": [
+      "%LOCALAPPDATA%\\HogwartsLegacy\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "GTA V",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Rockstar Games\\GTA V\\Profiles"
+    ]
+  },
+  {
+    "name": "Red Dead Redemption 2",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Rockstar Games\\Red Dead Redemption 2\\Profiles"
+    ]
+  },
+  {
+    "name": "Skyrim Special Edition",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\Skyrim Special Edition\\Saves"
+    ]
+  },
+  {
+    "name": "Fallout 4",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\Fallout4\\Saves"
+    ]
+  },
+  {
+    "name": "Starfield",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\Starfield\\Saves",
+      "%LOCALAPPDATA%\\Packages\\BethesdaSoftworks.Starfield_3275kfvn8vcwc\\SystemAppData\\wgs"
+    ]
+  },
+  {
+    "name": "Final Fantasy VII Remake Intergrade",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\FINAL FANTASY VII REMAKE"
+    ]
+  },
+  {
+    "name": "Final Fantasy XVI",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\FINAL FANTASY XVI"
+    ]
+  },
+  {
+    "name": "Final Fantasy XV",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\637650"
+    ]
+  },
+  {
+    "name": "NieR Automata",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\NieR_Automata"
+    ]
+  },
+  {
+    "name": "NieR Replicant",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\NieR Replicant ver.1.22474487139"
+    ]
+  },
+  {
+    "name": "Hades",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Saved Games\\Hades"
+    ]
+  },
+  {
+    "name": "Hades II",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Saved Games\\Hades II"
+    ]
+  },
+  {
+    "name": "Hollow Knight",
+    "paths": [
+      "%USERPROFILE%\\AppData\\LocalLow\\Team Cherry\\Hollow Knight"
+    ]
+  },
+  {
+    "name": "Celeste",
+    "paths": [
+      "%LOCALAPPDATA%\\Celeste\\Saves"
+    ]
+  },
+  {
+    "name": "Stardew Valley",
+    "paths": [
+      "%APPDATA%\\StardewValley\\Saves"
+    ]
+  },
+  {
+    "name": "Minecraft Java Edition",
+    "paths": [
+      "%APPDATA%\\.minecraft\\saves"
+    ]
+  },
+  {
+    "name": "Terraria",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\Terraria\\Players",
+      "%USERPROFILE%\\Documents\\My Games\\Terraria\\Worlds"
+    ]
+  },
+  {
+    "name": "Subnautica",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\264710"
+    ]
+  },
+  {
+    "name": "No Man's Sky",
+    "paths": [
+      "%APPDATA%\\HelloGames\\NMS"
+    ]
+  },
+  {
+    "name": "Doom Eternal",
+    "paths": [
+      "%USERPROFILE%\\Saved Games\\id Software\\DOOMEternal"
+    ]
+  },
+  {
+    "name": "Control",
+    "paths": [
+      "%LOCALAPPDATA%\\Remedy\\Control"
+    ]
+  },
+  {
+    "name": "Alan Wake 2",
+    "paths": [
+      "%LOCALAPPDATA%\\Remedy\\AlanWake2"
+    ]
+  },
+  {
+    "name": "Alan Wake Remastered",
+    "paths": [
+      "%LOCALAPPDATA%\\Remedy\\AlanWakeRemastered"
+    ]
+  },
+  {
+    "name": "Hellblade Senua's Sacrifice",
+    "paths": [
+      "%LOCALAPPDATA%\\HellbladeGame\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Hellblade 2 Senua's Saga",
+    "paths": [
+      "%LOCALAPPDATA%\\HellbladeII\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Ori and the Blind Forest",
+    "paths": [
+      "%LOCALAPPDATA%\\Ori and the Blind Forest DE"
+    ]
+  },
+  {
+    "name": "Ori and the Will of the Wisps",
+    "paths": [
+      "%LOCALAPPDATA%\\Ori and the Will of the Wisps"
+    ]
+  },
+  {
+    "name": "Star Wars Jedi Survivor",
+    "paths": [
+      "%LOCALAPPDATA%\\SwGame\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Star Wars Jedi Fallen Order",
+    "paths": [
+      "%LOCALAPPDATA%\\RespawnEntertainment"
+    ]
+  },
+  {
+    "name": "Assassin's Creed Valhalla",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Ubisoft\\Ubisoft Game Launcher\\savegames",
+      "%USERPROFILE%\\Documents\\Assassin's Creed Valhalla"
+    ]
+  },
+  {
+    "name": "Assassin's Creed Mirage",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Ubisoft\\Ubisoft Game Launcher\\savegames"
+    ]
+  },
+  {
+    "name": "Assassin's Creed Odyssey",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Ubisoft\\Ubisoft Game Launcher\\savegames"
+    ]
+  },
+  {
+    "name": "Far Cry 6",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Ubisoft\\Ubisoft Game Launcher\\savegames"
+    ]
+  },
+  {
+    "name": "Hitman World of Assassination",
+    "paths": [
+      "%LOCALAPPDATA%\\IO Interactive\\HITMAN3"
+    ]
+  },
+  {
+    "name": "Metal Gear Solid V The Phantom Pain",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\287700"
+    ]
+  },
+  {
+    "name": "Persona 5 Royal",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1687950"
+    ]
+  },
+  {
+    "name": "Persona 3 Reload",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\2161700"
+    ]
+  },
+  {
+    "name": "It Takes Two",
+    "paths": [
+      "%LOCALAPPDATA%\\ItTakesTwo\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "A Plague Tale Requiem",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\1182900"
+    ]
+  },
+  {
+    "name": "A Plague Tale Innocence",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\752590"
+    ]
+  },
+  {
+    "name": "Tomb Raider (2013)",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\203160"
+    ]
+  },
+  {
+    "name": "Rise of the Tomb Raider",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\391220"
+    ]
+  },
+  {
+    "name": "Shadow of the Tomb Raider",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\750920"
+    ]
+  },
+  {
+    "name": "Dying Light 2",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\534380",
+      "%USERPROFILE%\\Documents\\dying light 2"
+    ]
+  },
+  {
+    "name": "Witchfire",
+    "paths": [
+      "%LOCALAPPDATA%\\Witchfire\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "The Outer Worlds",
+    "paths": [
+      "%LOCALAPPDATA%\\Indiana\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Warhammer 40K Space Marine 2",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\2183900"
+    ]
+  },
+  {
+    "name": "Diablo IV",
+    "paths": [
+      "%USERPROFILE%\\Documents\\Diablo IV"
+    ]
+  },
+  {
+    "name": "Path of Exile 2",
+    "paths": [
+      "%USERPROFILE%\\Documents\\My Games\\Path of Exile 2"
+    ]
+  },
+  {
+    "name": "Batman Arkham Knight",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\208650"
+    ]
+  },
+  {
+    "name": "Shadow of War",
+    "paths": [
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\*\\356190"
+    ]
+  },
+  {
+    "name": "Biomutant",
+    "paths": [
+      "%LOCALAPPDATA%\\Biomutant\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Immortals of Aveum",
+    "paths": [
+      "%LOCALAPPDATA%\\Aveum\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Sifu",
+    "paths": [
+      "%LOCALAPPDATA%\\Sifu\\Saved\\SaveGames"
+    ]
+  },
+  {
+    "name": "Stellar Blade (Emulator)",
+    "paths": [
+      "%APPDATA%\\yuzu\\nand\\user\\save",
+      "%APPDATA%\\Ryujinx\\bis\\user\\saveMeta"
+    ]
+  }
+]

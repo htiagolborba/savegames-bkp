@@ -2,8 +2,6 @@
 
 A lightweight Windows desktop application that automatically locates game savegames on your PC and backs them up to a folder of your choice. Never lose your progress again — protect your saves before formatting, swapping SSDs, or reinstalling Windows.
 
-![Game Save Backup Tool — Main Window](docs/screenshot_main.png)
-
 ---
 
 ## ✨ Features

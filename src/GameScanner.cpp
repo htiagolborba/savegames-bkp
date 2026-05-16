@@ -1,6 +1,6 @@
 // =============================================================================
 // Game Save Backup Tool
-// Version:  0.3.0
+// Version:  0.4.0
 // Created:  2026-05-13
 // Author:   Hiran Tiago Lins Borba
 //
@@ -11,6 +11,7 @@
 //           Detects Steam on any drive via Registry and scans repack saves.
 //
 // History:
+//   0.4.0  2026-05-16  Preview selection, save sizes, open source folder, known-only mode
 //   0.3.0  2026-05-16  About dialog, professional headers and versioning
 //   0.2.0  2026-05-15  Repack save scanning (CODEX, RUNE, Goldberg)
 //   0.1.0  2026-05-14  Expanded to 94 games, Steam multi-drive detection

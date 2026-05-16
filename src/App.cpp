@@ -1,6 +1,6 @@
 // =============================================================================
 // Game Save Backup Tool
-// Version:  0.3.0
+// Version:  0.4.0
 // Created:  2026-05-13
 // Author:   Hiran Tiago Lins Borba
 //
@@ -10,6 +10,7 @@
 //           display, and threaded backup execution with real-time logging.
 //
 // History:
+//   0.4.0  2026-05-16  Preview selection, save sizes, open source folder, known-only mode
 //   0.3.0  2026-05-16  About dialog, professional headers and versioning
 //   0.2.0  2026-05-15  Repack save scanning (CODEX, RUNE, Goldberg)
 //   0.1.0  2026-05-14  Expanded to 94 games, Steam multi-drive detection
@@ -133,11 +134,12 @@ LRESULT App::wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
-        case IDC_BTN_CHOOSE:  onChooseFolder(); break;
-        case IDC_BTN_SCAN:    onScan();          break;
-        case IDC_BTN_BACKUP:  onBackup();        break;
-        case IDC_BTN_OPEN:    onOpenFolder();    break;
-        case IDC_BTN_ABOUT:   onAbout();         break;
+        case IDC_BTN_CHOOSE:      onChooseFolder();     break;
+        case IDC_BTN_SCAN:        onScan();             break;
+        case IDC_BTN_BACKUP:      onBackup();           break;
+        case IDC_BTN_OPEN:        onOpenFolder();       break;
+        case IDC_BTN_OPEN_SOURCE: onOpenSourceFolder(); break;
+        case IDC_BTN_ABOUT:       onAbout();            break;
         }
         return 0;
 
@@ -181,11 +183,11 @@ LRESULT App::wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
                     lvcd->clrTextBk = RGB(45, 45, 45);
                     return CDRF_NOTIFYSUBITEMDRAW;
                 case CDDS_ITEMPREPAINT | CDDS_SUBITEM:
-                    if (lvcd->iSubItem == 2) {
+                    if (lvcd->iSubItem == 3) {
                         // Color the status column
                         wchar_t buf[64];
                         ListView_GetItemText(nmhdr->hwndFrom,
-                            static_cast<int>(lvcd->nmcd.dwItemSpec), 2, buf, 64);
+                            static_cast<int>(lvcd->nmcd.dwItemSpec), 3, buf, 64);
                         std::wstring status(buf);
                         if (status == L"Found")
                             lvcd->clrText = RGB(100, 220, 100);
@@ -273,7 +275,15 @@ void App::createControls(HWND hwnd) {
         hwnd, reinterpret_cast<HMENU>(IDC_BTN_SCAN), m_hInstance, nullptr);
     SendMessageW(m_btnScan, WM_SETFONT, (WPARAM)m_hFontUI, TRUE);
 
-    // ListView for game entries
+    // "Known Games Only" checkbox (next to Scan button)
+    m_chkKnownOnly = CreateWindowExW(
+        0, L"BUTTON", L"Known Games Only",
+        WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+        210, 107, 180, 22,
+        hwnd, reinterpret_cast<HMENU>(IDC_CHK_KNOWN_ONLY), m_hInstance, nullptr);
+    SendMessageW(m_chkKnownOnly, WM_SETFONT, (WPARAM)m_hFontUI, TRUE);
+
+    // ListView for game entries (with checkboxes for selection)
     m_listView = CreateWindowExW(
         WS_EX_CLIENTEDGE, WC_LISTVIEWW, L"",
         WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SINGLESEL | LVS_NOSORTHEADER,
@@ -281,37 +291,43 @@ void App::createControls(HWND hwnd) {
         hwnd, reinterpret_cast<HMENU>(IDC_LISTVIEW), m_hInstance, nullptr);
     SendMessageW(m_listView, WM_SETFONT, (WPARAM)m_hFontUI, TRUE);
 
-    // Dark background for ListView
+    // Dark background for ListView + checkboxes
     ListView_SetBkColor(m_listView, RGB(45, 45, 45));
     ListView_SetTextBkColor(m_listView, RGB(45, 45, 45));
     ListView_SetTextColor(m_listView, RGB(220, 220, 220));
     ListView_SetExtendedListViewStyle(m_listView,
-        LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_DOUBLEBUFFER);
+        LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_DOUBLEBUFFER |
+        LVS_EX_CHECKBOXES);
 
     // Add columns
     LVCOLUMNW lvc = {};
     lvc.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
 
     lvc.iSubItem = 0;
-    lvc.cx       = 220;
+    lvc.cx       = 200;
     lvc.pszText  = const_cast<LPWSTR>(L"Game Name");
     ListView_InsertColumn(m_listView, 0, &lvc);
 
     lvc.iSubItem = 1;
-    lvc.cx       = 480;
+    lvc.cx       = 380;
     lvc.pszText  = const_cast<LPWSTR>(L"Save Path");
     ListView_InsertColumn(m_listView, 1, &lvc);
 
     lvc.iSubItem = 2;
-    lvc.cx       = 120;
-    lvc.pszText  = const_cast<LPWSTR>(L"Status");
+    lvc.cx       = 80;
+    lvc.pszText  = const_cast<LPWSTR>(L"Size");
     ListView_InsertColumn(m_listView, 2, &lvc);
+
+    lvc.iSubItem = 3;
+    lvc.cx       = 100;
+    lvc.pszText  = const_cast<LPWSTR>(L"Status");
+    ListView_InsertColumn(m_listView, 3, &lvc);
 
     // Backup Now button
     m_btnBackup = CreateWindowExW(
-        0, L"BUTTON", L"Backup Now",
+        0, L"BUTTON", L"Backup Selected",
         WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-        20, 435, 140, 35,
+        20, 435, 150, 35,
         hwnd, reinterpret_cast<HMENU>(IDC_BTN_BACKUP), m_hInstance, nullptr);
     SendMessageW(m_btnBackup, WM_SETFONT, (WPARAM)m_hFontUI, TRUE);
 
@@ -319,9 +335,17 @@ void App::createControls(HWND hwnd) {
     m_btnOpen = CreateWindowExW(
         0, L"BUTTON", L"Open Backup Folder",
         WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-        175, 435, 180, 35,
+        180, 435, 180, 35,
         hwnd, reinterpret_cast<HMENU>(IDC_BTN_OPEN), m_hInstance, nullptr);
     SendMessageW(m_btnOpen, WM_SETFONT, (WPARAM)m_hFontUI, TRUE);
+
+    // Open Source Folder button
+    m_btnOpenSource = CreateWindowExW(
+        0, L"BUTTON", L"Open Source Folder",
+        WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+        370, 435, 180, 35,
+        hwnd, reinterpret_cast<HMENU>(IDC_BTN_OPEN_SOURCE), m_hInstance, nullptr);
+    SendMessageW(m_btnOpenSource, WM_SETFONT, (WPARAM)m_hFontUI, TRUE);
 
     // Log area (multiline read-only edit)
     m_editLog = CreateWindowExW(
@@ -352,8 +376,9 @@ void App::resizeControls(int width, int height) {
 
     // Buttons row
     int btnY = 145 + lvH + 10;
-    MoveWindow(m_btnBackup, PAD, btnY, 140, 35, TRUE);
-    MoveWindow(m_btnOpen, 175, btnY, 180, 35, TRUE);
+    MoveWindow(m_btnBackup, PAD, btnY, 150, 35, TRUE);
+    MoveWindow(m_btnOpen, PAD + 160, btnY, 180, 35, TRUE);
+    MoveWindow(m_btnOpenSource, PAD + 350, btnY, 180, 35, TRUE);
 
     // Log area
     int logY = btnY + 45;
@@ -395,7 +420,9 @@ void App::onChooseFolder() {
 void App::onScan() {
     if (m_isWorking) return;
 
-    appendLog("Scanning for savegames...");
+    bool knownOnly = (SendMessageW(m_chkKnownOnly, BM_GETCHECK, 0, 0) == BST_CHECKED);
+
+    appendLog(knownOnly ? "Scanning known games only..." : "Scanning for savegames...");
     m_games.clear();
     ListView_DeleteAllItems(m_listView);
 
@@ -404,31 +431,44 @@ void App::onScan() {
     // Scan known games
     std::wstring jsonPath = Utils::getExeDirectory() + L"\\known_games.json";
     auto known = scanner.scanKnownGames(jsonPath);
-
-    // Scan generic locations
-    appendLog("Running generic scan...");
-    auto generic = scanner.scanGenericLocations();
-
-    // Scan repack / crack emulator save locations
-    appendLog("Scanning repack save locations (CODEX, RUNE, Goldberg)...");
-    auto repack = scanner.scanRepackLocations();
-
-    // Merge and deduplicate
     m_games = known;
-    m_games.insert(m_games.end(), generic.begin(), generic.end());
-    m_games.insert(m_games.end(), repack.begin(), repack.end());
+
+    if (!knownOnly) {
+        // Scan generic locations
+        appendLog("Running generic scan...");
+        auto generic = scanner.scanGenericLocations();
+        m_games.insert(m_games.end(), generic.begin(), generic.end());
+
+        // Scan repack / crack emulator save locations
+        appendLog("Scanning repack save locations (CODEX, RUNE, Goldberg)...");
+        auto repack = scanner.scanRepackLocations();
+        m_games.insert(m_games.end(), repack.begin(), repack.end());
+    }
+
     GameScanner::deduplicate(m_games);
+
+    // Calculate folder sizes for found entries
+    appendLog("Calculating save sizes...");
+    for (auto& g : m_games) {
+        if (g.status == "Found" && !g.sourcePath.empty()) {
+            g.sizeBytes = Utils::getFolderSize(g.sourcePath);
+        }
+    }
 
     populateListView();
 
     int foundCount = 0;
+    uint64_t totalSize = 0;
     for (auto& g : m_games) {
-        if (g.status == "Found") foundCount++;
+        if (g.status == "Found") {
+            foundCount++;
+            totalSize += g.sizeBytes;
+        }
     }
 
     appendLog("Scan complete. Found " + std::to_string(foundCount) +
               " save location(s) across " + std::to_string(m_games.size()) +
-              " game(s).");
+              " game(s). Total size: " + Utils::formatFileSize(totalSize));
 }
 
 void App::onBackup() {
@@ -448,15 +488,21 @@ void App::onBackup() {
         return;
     }
 
-    // Check if there are any found games
-    bool hasFound = false;
-    for (auto& g : m_games) {
-        if (g.status == "Found") { hasFound = true; break; }
+    // Build list of checked games only
+    std::vector<GameEntry> selectedGames;
+    int itemCount = ListView_GetItemCount(m_listView);
+    for (int i = 0; i < itemCount && i < static_cast<int>(m_games.size()); ++i) {
+        BOOL checked = ListView_GetCheckState(m_listView, i);
+        if (checked && m_games[i].status == "Found") {
+            selectedGames.push_back(m_games[i]);
+        }
     }
-    if (!hasFound) {
+
+    if (selectedGames.empty()) {
         MessageBoxW(m_hwnd,
-            L"No savegames were found to backup.",
-            L"Nothing to Backup", MB_OK | MB_ICONINFORMATION);
+            L"No savegames are selected for backup.\n"
+            L"Use the checkboxes to select which saves to back up.",
+            L"Nothing Selected", MB_OK | MB_ICONINFORMATION);
         return;
     }
 
@@ -471,10 +517,12 @@ void App::onBackup() {
 
     appendLog("=== Starting backup ===");
 
+    appendLog("Backing up " + std::to_string(selectedGames.size()) + " selected save(s)...");
+
     // Run backup on worker thread
     HWND hwnd = m_hwnd;
     std::wstring backupRoot = m_backupFolder;
-    std::vector<GameEntry> games = m_games;
+    std::vector<GameEntry> games = selectedGames;
 
     if (m_workerThread.joinable()) m_workerThread.join();
 
@@ -482,23 +530,21 @@ void App::onBackup() {
         BackupManager mgr;
         mgr.setProgressCallback([hwnd](const std::string& game,
                                        const std::string& msg) {
-            // Post log message to UI thread
             auto* str = new std::string("[" + game + "] " + msg);
             PostMessageW(hwnd, WM_APP_LOG, reinterpret_cast<WPARAM>(str), 0);
         });
 
         auto results = mgr.performBackup(backupRoot, games);
 
-        // Update game statuses
-        for (size_t i = 0; i < games.size(); ++i) {
-            for (auto& r : results) {
-                if (r.gameName == games[i].name &&
-                    r.sourcePath == games[i].sourcePath) {
+        // Update game statuses in the main list
+        for (auto& r : results) {
+            for (size_t i = 0; i < this->m_games.size(); ++i) {
+                if (r.gameName == this->m_games[i].name &&
+                    r.sourcePath == this->m_games[i].sourcePath) {
                     auto* status = new std::string(r.success ? "Backed up" : "Error");
                     PostMessageW(hwnd, WM_APP_UPDATE_ITEM,
                                  static_cast<WPARAM>(i),
                                  reinterpret_cast<LPARAM>(status));
-                    // Also update our local copy
                     break;
                 }
             }
@@ -524,10 +570,32 @@ void App::onOpenFolder() {
                   nullptr, nullptr, SW_SHOWNORMAL);
 }
 
+void App::onOpenSourceFolder() {
+    // Get selected item from ListView
+    int sel = ListView_GetNextItem(m_listView, -1, LVNI_SELECTED);
+    if (sel < 0 || sel >= static_cast<int>(m_games.size())) {
+        MessageBoxW(m_hwnd,
+            L"Please select a game from the list first.",
+            L"No Selection", MB_OK | MB_ICONINFORMATION);
+        return;
+    }
+
+    auto& game = m_games[sel];
+    if (game.sourcePath.empty() || game.status == "Not found") {
+        MessageBoxW(m_hwnd,
+            L"This game's save folder was not found.",
+            L"Not Found", MB_OK | MB_ICONWARNING);
+        return;
+    }
+
+    ShellExecuteW(nullptr, L"open", game.sourcePath.c_str(),
+                  nullptr, nullptr, SW_SHOWNORMAL);
+}
+
 void App::onAbout() {
     std::wstring aboutText =
         L"Game Save Backup Tool\n"
-        L"Version 0.3.0 (Beta)\n"
+        L"Version 0.4.0 (Beta)\n"
         L"\n"
         L"Created: 2026-05-13\n"
         L"Author: Hiran Tiago Lins Borba\n"
@@ -576,6 +644,8 @@ void App::populateListView() {
 
         std::wstring wName   = Utils::stringToWstring(game.name);
         std::wstring wPath   = game.sourcePath;
+        std::wstring wSize   = Utils::stringToWstring(
+                                   Utils::formatFileSize(game.sizeBytes));
         std::wstring wStatus = Utils::stringToWstring(game.status);
 
         LVITEMW lvi = {};
@@ -588,7 +658,14 @@ void App::populateListView() {
         ListView_SetItemText(m_listView, i, 1,
                              const_cast<LPWSTR>(wPath.c_str()));
         ListView_SetItemText(m_listView, i, 2,
+                             const_cast<LPWSTR>(wSize.c_str()));
+        ListView_SetItemText(m_listView, i, 3,
                              const_cast<LPWSTR>(wStatus.c_str()));
+
+        // Auto-check items that were found
+        if (game.status == "Found") {
+            ListView_SetCheckState(m_listView, i, TRUE);
+        }
     }
 }
 
@@ -597,6 +674,6 @@ void App::updateListViewItemStatus(int index, const std::string& status) {
 
     m_games[index].status = status;
     std::wstring wStatus = Utils::stringToWstring(status);
-    ListView_SetItemText(m_listView, index, 2,
+    ListView_SetItemText(m_listView, index, 3,
                          const_cast<LPWSTR>(wStatus.c_str()));
 }

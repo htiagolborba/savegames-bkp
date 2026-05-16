@@ -1,6 +1,6 @@
 // =============================================================================
 // Game Save Backup Tool
-// Version:  0.3.0
+// Version:  0.4.0
 // Created:  2026-05-13
 // Author:   Hiran Tiago Lins Borba
 //
@@ -10,6 +10,7 @@
 //           file copy with timestamp preservation, and UTF-8/UTF-16 conversion.
 //
 // History:
+//   0.4.0  2026-05-16  Preview selection, save sizes, open source folder, known-only mode
 //   0.3.0  2026-05-16  About dialog, professional headers and versioning
 //   0.2.0  2026-05-15  Repack save scanning (CODEX, RUNE, Goldberg)
 //   0.1.0  2026-05-14  Expanded to 94 games, Steam multi-drive detection
@@ -298,6 +299,30 @@ std::string getCurrentTimestampReadable() {
 
     std::ostringstream oss;
     oss << std::put_time(&tm_buf, "%Y-%m-%d %H:%M:%S");
+    return oss.str();
+}
+
+// ---------------------------------------------------------------------------
+// Display helpers
+// ---------------------------------------------------------------------------
+std::string formatFileSize(uint64_t bytes) {
+    if (bytes == 0) return "-";
+
+    const char* units[] = { "B", "KB", "MB", "GB", "TB" };
+    int unitIndex = 0;
+    double size = static_cast<double>(bytes);
+
+    while (size >= 1024.0 && unitIndex < 4) {
+        size /= 1024.0;
+        unitIndex++;
+    }
+
+    std::ostringstream oss;
+    if (unitIndex == 0) {
+        oss << bytes << " B";
+    } else {
+        oss << std::fixed << std::setprecision(1) << size << " " << units[unitIndex];
+    }
     return oss.str();
 }
 

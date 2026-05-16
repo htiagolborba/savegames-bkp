@@ -1,6 +1,6 @@
 // =============================================================================
 // Game Save Backup Tool
-// Version:  0.3.0
+// Version:  0.4.0
 // Created:  2026-05-13
 // Author:   Hiran Tiago Lins Borba
 //
@@ -9,6 +9,7 @@
 //           user interactions, and orchestrates scanning and backup operations.
 //
 // History:
+//   0.4.0  2026-05-16  Preview selection, save sizes, open source folder, known-only mode
 //   0.3.0  2026-05-16  About dialog, professional headers and versioning
 //   0.2.0  2026-05-15  Repack save scanning (CODEX, RUNE, Goldberg)
 //   0.1.0  2026-05-14  Expanded to 94 games, Steam multi-drive detection
@@ -56,6 +57,7 @@ private:
     void onScan();
     void onBackup();
     void onOpenFolder();
+    void onOpenSourceFolder();
     void onAbout();
 
     // ---- UI helpers ----
@@ -75,10 +77,12 @@ private:
     HWND m_editPath   = nullptr;
     HWND m_btnScan    = nullptr;
     HWND m_listView   = nullptr;
-    HWND m_btnBackup  = nullptr;
-    HWND m_btnOpen    = nullptr;
-    HWND m_btnAbout   = nullptr;
-    HWND m_editLog    = nullptr;
+    HWND m_btnBackup     = nullptr;
+    HWND m_btnOpen       = nullptr;
+    HWND m_btnOpenSource = nullptr;
+    HWND m_btnAbout      = nullptr;
+    HWND m_chkKnownOnly  = nullptr;
+    HWND m_editLog       = nullptr;
 
     // Data
     ConfigManager           m_config;

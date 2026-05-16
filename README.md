@@ -164,7 +164,7 @@ graph TD
 
 ### 1. Known Games Database (`known_games.json`)
 
-The app ships with a JSON file containing paths for 38+ popular games. Paths support:
+The app ships with a JSON file containing paths for 94+ popular games. Paths support:
 
 - **Environment variables**: `%USERPROFILE%`, `%APPDATA%`, `%LOCALAPPDATA%`, etc.
 - **Wildcards**: `*` in path segments (e.g., `Steam\userdata\*\2050650` matches all Steam user IDs)
@@ -349,10 +349,11 @@ Editable game database. Must be in the same directory as the `.exe`.
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **0.4.0** | 2026-05-16 | Preview/selection with checkboxes (deselect false positives). Estimated save size column. Open Source Folder button. Known Games Only mode. |
 | **0.3.0** | 2026-05-16 | About dialog with program info. Professional file headers and beta versioning across all source files. |
 | **0.2.0** | 2026-05-15 | Repack save scanning (CODEX, RUNE, TENOKE, PLAZA, Goldberg emulator). |
 | **0.1.0** | 2026-05-14 | Expanded to 94 known games (RE Requiem, God of War Ragnarok, Spider-Man 2, Death Stranding 2, and more). Steam auto-detection via Windows Registry across all drives. |
-| **0.0.1** | 2026-05-13 | Initial beta release — Win32 UI, known games database (38 games), generic save scanner, timestamped backups, Markdown history, persistent config, dark theme. |
+| **0.0.1** | 2026-05-13 | Initial beta release — Win32 UI, known games database, generic save scanner, timestamped backups, Markdown history, persistent config, dark theme. |
 
 ---
 

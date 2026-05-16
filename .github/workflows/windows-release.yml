@@ -1,0 +1,156 @@
+# =============================================================================
+# Game Save Backup Tool — CI/CD Pipeline
+# 
+# Automatically builds, packages, and publishes releases when a version tag
+# (e.g., v1.0.0) is pushed to the repository.
+#
+# Author: Hiran Tiago Lins Borba
+# =============================================================================
+
+name: Build & Release (Windows)
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build on Windows
+    runs-on: windows-latest
+
+    steps:
+      # ------------------------------------------------------------------
+      # 1. Checkout repository
+      # ------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      # 2. Display build info
+      # ------------------------------------------------------------------
+      - name: Display build info
+        shell: pwsh
+        run: |
+          Write-Host "========================================="
+          Write-Host "  Game Save Backup Tool — Build Pipeline"
+          Write-Host "========================================="
+          Write-Host "Tag / Ref:    ${{ github.ref_name }}"
+          Write-Host "SHA:          ${{ github.sha }}"
+          Write-Host "Runner OS:    ${{ runner.os }}"
+          Write-Host "Timestamp:    $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+          Write-Host "========================================="
+
+      # ------------------------------------------------------------------
+      # 3. Configure MSVC environment
+      # ------------------------------------------------------------------
+      - name: Setup MSVC Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # ------------------------------------------------------------------
+      # 4. Configure CMake
+      # ------------------------------------------------------------------
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      # ------------------------------------------------------------------
+      # 5. Build project
+      # ------------------------------------------------------------------
+      - name: Build project
+        run: cmake --build build --config Release
+
+      # ------------------------------------------------------------------
+      # 6. Locate executable
+      # ------------------------------------------------------------------
+      - name: Locate executable
+        id: find_exe
+        shell: pwsh
+        run: |
+          Write-Host "Searching for GameSaveBackupTool.exe..."
+          $exe = Get-ChildItem -Path build -Recurse -Filter "GameSaveBackupTool.exe" | Select-Object -First 1
+          if (-not $exe) {
+            Write-Error "ERROR: GameSaveBackupTool.exe not found in build directory!"
+            exit 1
+          }
+          Write-Host "Found: $($exe.FullName)"
+          Write-Host "Size:  $([math]::Round($exe.Length / 1KB, 1)) KB"
+          echo "EXE_PATH=$($exe.FullName)" >> $env:GITHUB_OUTPUT
+
+      # ------------------------------------------------------------------
+      # 7. Create distribution package
+      # ------------------------------------------------------------------
+      - name: Create distribution package
+        id: package
+        shell: pwsh
+        run: |
+          $distDir = "dist\GameSaveBackupTool"
+          $zipName = "GameSaveBackupTool-${{ github.ref_name }}-win64.zip"
+
+          # Create distribution directory
+          New-Item -ItemType Directory -Path $distDir -Force | Out-Null
+
+          # Copy executable
+          Copy-Item -Path "${{ steps.find_exe.outputs.EXE_PATH }}" -Destination $distDir
+          Write-Host "[OK] GameSaveBackupTool.exe"
+
+          # Copy known_games.json
+          Copy-Item -Path "known_games.json" -Destination $distDir
+          Write-Host "[OK] known_games.json"
+
+          # Copy README
+          Copy-Item -Path "README.md" -Destination $distDir
+          Write-Host "[OK] README.md"
+
+          # Copy LICENSE if it exists
+          if (Test-Path "LICENSE") {
+            Copy-Item -Path "LICENSE" -Destination $distDir
+            Write-Host "[OK] LICENSE"
+          }
+
+          # List package contents
+          Write-Host ""
+          Write-Host "========================================="
+          Write-Host "  Distribution Package Contents"
+          Write-Host "========================================="
+          Get-ChildItem -Path $distDir | ForEach-Object {
+            $size = if ($_.Length) { "$([math]::Round($_.Length / 1KB, 1)) KB" } else { "dir" }
+            Write-Host "  $($_.Name)  ($size)"
+          }
+          Write-Host "========================================="
+
+          # Create ZIP
+          Compress-Archive -Path "$distDir\*" -DestinationPath $zipName
+          $zipSize = [math]::Round((Get-Item $zipName).Length / 1KB, 1)
+          Write-Host ""
+          Write-Host "Created: $zipName ($zipSize KB)"
+
+          echo "ZIP_PATH=$zipName" >> $env:GITHUB_OUTPUT
+          echo "ZIP_NAME=$zipName" >> $env:GITHUB_OUTPUT
+
+      # ------------------------------------------------------------------
+      # 8. Upload build artifact (always)
+      # ------------------------------------------------------------------
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GameSaveBackupTool-win64
+          path: ${{ steps.package.outputs.ZIP_PATH }}
+          retention-days: 30
+
+      # ------------------------------------------------------------------
+      # 9. Create GitHub Release and attach asset (on tag push only)
+      # ------------------------------------------------------------------
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.package.outputs.ZIP_PATH }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

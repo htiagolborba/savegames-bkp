@@ -1,6 +1,6 @@
 // =============================================================================
 // Game Save Backup Tool
-// Version:  0.4.0
+// Version:  1.0.0
 // Created:  2026-05-13
 // Author:   Hiran Tiago Lins Borba
 //
@@ -10,6 +10,7 @@
 //           display, and threaded backup execution with real-time logging.
 //
 // History:
+//   1.0.0  2026-05-16  Stable release, GitHub Actions CI/CD, MIT License
 //   0.4.0  2026-05-16  Preview selection, save sizes, open source folder, known-only mode
 //   0.3.0  2026-05-16  About dialog, professional headers and versioning
 //   0.2.0  2026-05-15  Repack save scanning (CODEX, RUNE, Goldberg)
@@ -595,7 +596,7 @@ void App::onOpenSourceFolder() {
 void App::onAbout() {
     std::wstring aboutText =
         L"Game Save Backup Tool\n"
-        L"Version 0.4.0 (Beta)\n"
+        L"Version 1.0.0\n"
         L"\n"
         L"Created: 2026-05-13\n"
         L"Author: Hiran Tiago Lins Borba\n"

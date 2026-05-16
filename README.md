@@ -340,7 +340,6 @@ Editable game database. Must be in the same directory as the `.exe`.
 - **Windows only** — Uses Win32 API for the interface and Windows-specific paths.
 - **No scheduled backups** — The app runs on-demand only. You can use Windows Task Scheduler to automate it.
 - **No restore functionality** — The app only creates backups. To restore, manually copy files back to their original locations.
-- **Steam library detection** — Only checks default Steam install paths. If Steam is installed in a custom location, some games may not be found via the known-games list (but the generic scan may still find them).
 - **Large saves** — The generic scan skips folders larger than 2 GB to prevent accidental backup of full game installs.
 
 ---
@@ -349,11 +348,46 @@ Editable game database. Must be in the same directory as the `.exe`.
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **1.0.0** | 2026-05-16 | 🎉 Stable release. GitHub Actions CI/CD pipeline for automated builds and releases. MIT License. |
 | **0.4.0** | 2026-05-16 | Preview/selection with checkboxes (deselect false positives). Estimated save size column. Open Source Folder button. Known Games Only mode. |
 | **0.3.0** | 2026-05-16 | About dialog with program info. Professional file headers and beta versioning across all source files. |
 | **0.2.0** | 2026-05-15 | Repack save scanning (CODEX, RUNE, TENOKE, PLAZA, Goldberg emulator). |
 | **0.1.0** | 2026-05-14 | Expanded to 94 known games (RE Requiem, God of War Ragnarok, Spider-Man 2, Death Stranding 2, and more). Steam auto-detection via Windows Registry across all drives. |
 | **0.0.1** | 2026-05-13 | Initial beta release — Win32 UI, known games database, generic save scanner, timestamped backups, Markdown history, persistent config, dark theme. |
+
+---
+
+## 🚀 Building Releases with GitHub Actions
+
+This project includes a CI/CD pipeline that automatically builds and publishes releases.
+
+### How to create a new release
+
+1. **Tag your commit** with a version starting with `v`:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+2. **GitHub Actions will automatically:**
+   - Compile the project on a Windows runner using CMake + MSVC
+   - Locate the compiled `GameSaveBackupTool.exe`
+   - Package it into a ZIP with `known_games.json`, `README.md`, and `LICENSE`
+   - Upload the ZIP as a build artifact
+   - Create a GitHub Release and attach the ZIP as a downloadable asset
+
+3. **Download your release** from the [Releases page](https://github.com/htiagolborba/savegames-bkp/releases).
+
+The release asset will be named:
+
+```
+GameSaveBackupTool-v1.0.0-win64.zip
+```
+
+### Manual builds
+
+You can also trigger a build manually from the **Actions** tab in GitHub without creating a tag (using `workflow_dispatch`).
 
 ---
 
@@ -367,4 +401,4 @@ This project was born from a real need: preventing the loss of game save data du
 
 ## 📄 License
 
-This project is open source and available for personal and educational use. The bundled [nlohmann/json](https://github.com/nlohmann/json) library is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](LICENSE). The bundled [nlohmann/json](https://github.com/nlohmann/json) library is also licensed under the MIT License.

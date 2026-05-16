@@ -28,6 +28,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Shlwapi
     Shell32
     Ole32
+    Advapi32
 )
 
 # Enable Unicode

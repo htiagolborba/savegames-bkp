@@ -1,6 +1,6 @@
 // =============================================================================
 // Game Save Backup Tool
-// Version:  0.4.0
+// Version:  1.0.0
 // Created:  2026-05-13
 // Author:   Hiran Tiago Lins Borba
 //
@@ -9,6 +9,7 @@
 //           known-games JSON database and generic keyword-based scanning.
 //
 // History:
+//   1.0.0  2026-05-16  Stable release, GitHub Actions CI/CD, MIT License
 //   0.4.0  2026-05-16  Preview selection, save sizes, open source folder, known-only mode
 //   0.3.0  2026-05-16  About dialog, professional headers and versioning
 //   0.2.0  2026-05-15  Repack save scanning (CODEX, RUNE, Goldberg)
